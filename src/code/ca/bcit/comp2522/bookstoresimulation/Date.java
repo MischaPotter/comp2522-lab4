@@ -56,6 +56,7 @@ public class Date implements Printable
     private static final int LEAP_YEAR_CYCLE    = 400;
     private static final int CENTURY_INTERVAL   = 100;
     private static final int LEAP_YEAR_INTERVAL = 4;
+    private static final int LEAP_YEAR_NO_REMAINDER = 0;
 
     // century offsets
     private static final int START_EIGHTEEN_HUNDREDS    = 1800;
@@ -99,6 +100,15 @@ public class Date implements Printable
         this.year  = year;
         this.month = month;
         this.day   = day;
+    }
+
+    @Override
+    /**
+     * Method from Printable interface that prints every instance variable in a sentence
+     */
+    public void display()
+    {
+        System.out.println("The date is: " + getDayOfTheWeek() + ", " + getMonthName() + " " + day + ", " + year + ".");
     }
 
     /**
@@ -272,18 +282,18 @@ public class Date implements Printable
     {
         return switch (month)
         {
-            case 1 -> "January";
-            case 2 -> "February";
-            case 3 -> "March";
-            case 4 -> "April";
-            case 5 -> "May";
-            case 6 -> "June";
-            case 7 -> "July";
-            case 8 -> "August";
-            case 9 -> "September";
-            case 10 -> "October";
-            case 11 -> "November";
-            case 12 -> "December";
+            case JAN -> "January";
+            case FEB -> "February";
+            case MAR -> "March";
+            case APR -> "April";
+            case MAY -> "May";
+            case JUNE -> "June";
+            case JULY -> "July";
+            case AUG -> "August";
+            case SEP -> "September";
+            case OCT -> "October";
+            case NOV -> "November";
+            case DEC -> "December";
             default -> throw new IllegalArgumentException("Invalid month: " + month);
         };
     }
@@ -367,14 +377,35 @@ public class Date implements Printable
      */
     private static boolean isLeapYear(final int year)
     {
-        if (year % LEAP_YEAR_CYCLE == 0)
+        if (year % LEAP_YEAR_CYCLE == LEAP_YEAR_NO_REMAINDER)
         {
             return true;
         }
-        else if (year % LEAP_YEAR_INTERVAL == 0)
+        else if (year % LEAP_YEAR_INTERVAL == LEAP_YEAR_NO_REMAINDER)
         {
-            return year % CENTURY_INTERVAL != 0;
+            return year % CENTURY_INTERVAL != LEAP_YEAR_NO_REMAINDER;
         }
         return false;
     }
+
+    /**
+     * Returns true if this date is before the other date, and false otherwise.
+     *
+     * @param other the other date being compared to
+     * 
+     * @return true if this date is before the other date
+     */
+    public boolean isBefore(final Date other)
+    {
+        if (this.year != other.year)
+        {
+            return this.year < other.year;
+        }
+        if (this.month != other.month)
+        {
+            return this.month < other.month;
+        }
+        return this.day < other.day;
+    }
+
 }
