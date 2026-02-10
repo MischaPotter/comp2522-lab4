@@ -395,6 +395,10 @@ public class Date implements Printable
      */
     public boolean isBefore(final Date other)
     {
+        if (other == null)
+        {
+            return true;
+        }
         if (this.year != other.year)
         {
             return this.year < other.year;

@@ -7,9 +7,10 @@ package ca.bcit.comp2522.bookstoresimulation;
  * @author Kenny Fok
  * @version 1.0
  */
-public class Author extends Person implements Printable
+public class Author extends Person implements Printable, Comparable<Object>
 {
-    private static final int MAX_GENRE_LENGTH = 30;
+    private static final int SAME_YEAR_COMPARETO_RESULT = 1;
+    private static final int MAX_GENRE_LENGTH           = 30;
 
     private final String genre;
 
@@ -46,6 +47,31 @@ public class Author extends Person implements Printable
         {
             throw new IllegalArgumentException("Invalid genre: " + genre);
         }
+    }
+
+    /**
+     * Compares this Author to another object.
+     *
+     * @param that the other Author object to compare to
+     * @return the result of compareTo
+     */
+    @Override
+    public int compareTo(final Object that)
+    {
+        if (!(that instanceof Author))
+        {
+            throw new IllegalArgumentException("Invalid object to compare to" + that);
+        }
+
+        final Author a;
+        a = (Author) that;
+
+        if (getDateOfBirth().getYear() == a.getDateOfBirth().getYear() &&
+            getDateOfBirth().getMonth() > a.getDateOfBirth().getMonth())
+        {
+            return SAME_YEAR_COMPARETO_RESULT;
+        }
+        return getDateOfBirth().getYear() - a.getDateOfBirth().getYear();
     }
 
     /**

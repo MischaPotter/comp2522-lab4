@@ -1,5 +1,7 @@
 package ca.bcit.comp2522.bookstoresimulation;
 
+import java.lang.reflect.Type;
+
 /**
  * Models a Person that has a date of birth/death and a name.
  *
@@ -7,7 +9,7 @@ package ca.bcit.comp2522.bookstoresimulation;
  * @author Kenny Fok
  * @version 1.0
  */
-public class Person implements Comparable<Person>, Printable, Reversible
+public class Person implements Comparable<Object>, Printable, Reversible
 {
     public static final int OLDER_COMPARE_RESULT    = 100;
     public static final int YOUNGER_COMPARE_RESULT  = -100;
@@ -76,7 +78,11 @@ public class Person implements Comparable<Person>, Printable, Reversible
     private static void validateDateOfDeath(final Date dateOfDeath,
                                             final Date dateOfBirth)
     {
-        if (dateOfDeath.isBefore(dateOfBirth))
+        if (dateOfDeath == null)
+        {
+            //??
+        }
+        else if (dateOfDeath.isBefore(dateOfBirth))
         {
             throw new IllegalArgumentException("Invalid date of death: " + dateOfDeath);
         }
@@ -121,19 +127,29 @@ public class Person implements Comparable<Person>, Printable, Reversible
      * otherwise they are the same age
      */
     @Override
-    public int compareTo(final Person that)
+    public int compareTo(final Object that)
     {
-        if (this.dateOfBirth.isBefore(that.dateOfBirth))
+        if (!(that instanceof Person))
         {
-            return YOUNGER_COMPARE_RESULT;
+            throw new IllegalArgumentException("Not a Person");
         }
-        else if (that.dateOfBirth.isBefore(this.dateOfBirth))
+
+        final Person p;
+        p = (Person) that;
+
         {
-            return OLDER_COMPARE_RESULT;
-        }
-        else
-        {
-            return SAME_AGE_COMPARE_RESULT;
+            if (this.dateOfBirth.isBefore(p.dateOfBirth))
+            {
+                return YOUNGER_COMPARE_RESULT;
+            }
+            else if (p.dateOfBirth.isBefore(this.dateOfBirth))
+            {
+                return OLDER_COMPARE_RESULT;
+            }
+            else
+            {
+                return SAME_AGE_COMPARE_RESULT;
+            }
         }
     }
 
