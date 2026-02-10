@@ -5,7 +5,6 @@ package ca.bcit.comp2522.bookstoresimulation;
  *
  * @author Mischa Potter
  * @author Kenny Fok
- *
  * @version 1.0
  */
 public class Date implements Printable
@@ -53,9 +52,9 @@ public class Date implements Printable
     private static final int FRI = 6;
 
     // leap year calculation constants
-    private static final int LEAP_YEAR_CYCLE    = 400;
-    private static final int CENTURY_INTERVAL   = 100;
-    private static final int LEAP_YEAR_INTERVAL = 4;
+    private static final int LEAP_YEAR_CYCLE        = 400;
+    private static final int CENTURY_INTERVAL       = 100;
+    private static final int LEAP_YEAR_INTERVAL     = 4;
     private static final int LEAP_YEAR_NO_REMAINDER = 0;
 
     // century offsets
@@ -102,10 +101,10 @@ public class Date implements Printable
         this.day   = day;
     }
 
-    @Override
     /**
      * Method from Printable interface that prints every instance variable in a sentence
      */
+    @Override
     public void display()
     {
         System.out.println("The date is: " + getDayOfTheWeek() + ", " + getMonthName() + " " + day + ", " + year + ".");
@@ -392,7 +391,6 @@ public class Date implements Printable
      * Returns true if this date is before the other date, and false otherwise.
      *
      * @param other the other date being compared to
-     * 
      * @return true if this date is before the other date
      */
     public boolean isBefore(final Date other)
@@ -407,5 +405,4 @@ public class Date implements Printable
         }
         return this.day < other.day;
     }
-
 }

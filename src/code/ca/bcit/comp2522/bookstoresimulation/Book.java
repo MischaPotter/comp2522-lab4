@@ -1,21 +1,20 @@
 package ca.bcit.comp2522.bookstoresimulation;
 
 /**
- * E
+ * Models a Book.
  *
  * @author Mischa Potter
  * @author Kenny Fok
- *
  * @version 1.0
  */
 public class Book implements Comparable<Book>, Printable, Reversible
 {
-    private static final int MAX_TITLE_LENGTH = 100;
+    private static final int MAX_TITLE_LENGTH   = 100;
     private static final int MIN_YEAR_PUBLISHED = 1;
-    private static final int CURRENT_YEAR = 2026;
+    private static final int CURRENT_YEAR       = 2026;
 
     private final String title;
-    private final int yearPublished;
+    private final int    yearPublished;
     private final Author author;
 
     /**
@@ -25,70 +24,68 @@ public class Book implements Comparable<Book>, Printable, Reversible
      * @param yearPublished the year the book was published
      * @param author        the author of the book
      */
-    public Book(final String title, final int yearPublished, final Author author)
+    public Book(final String title,
+                final int yearPublished,
+                final Author author)
     {
         validateTitle(title);
         validateYearPublished(yearPublished);
         validateAuthor(author);
 
-        this.title = title;
+        this.title         = title;
         this.yearPublished = yearPublished;
-        this.author = author;
+        this.author        = author;
     }
 
     /*
-     * Validates that the title is not null or empty and less than max title length.
+     * Validates the title.
      *
      * @param title the title to validate
      *
-     * @throws IllegalArgumentException if the title is null or empty or exceeds max title length.
+     * @throws IllegalArgumentException if the title is invalid
      */
     private static void validateTitle(final String title)
     {
-        if (title == null || title.isEmpty())
+        if (title == null || title.isEmpty() || title.length() > MAX_TITLE_LENGTH)
         {
-            throw new IllegalArgumentException("Title cannot be null or empty.");
-        }
-        if (title.length() > MAX_TITLE_LENGTH)
-        {
-            throw new IllegalArgumentException("Title cannot exceed " + MAX_TITLE_LENGTH + " characters.");
+            throw new IllegalArgumentException("Invalid title: " + title);
         }
     }
 
     /*
-     * Validates that the year published is between min year and current year.
+     * Validates the year published.
      *
      * @param yearPublished the year published to validate
      *
-     * @throws IllegalArgumentException if the year published is not between min year and current year.
+     * @throws IllegalArgumentException if the year is invalid
      */
     private static void validateYearPublished(final int yearPublished)
     {
         if (yearPublished < MIN_YEAR_PUBLISHED || yearPublished > CURRENT_YEAR)
         {
-            throw new IllegalArgumentException("Year published must be between " + MIN_YEAR_PUBLISHED + " and " + CURRENT_YEAR + ".");
+            throw new IllegalArgumentException("Invalid year: " + yearPublished);
         }
     }
 
     /*
-     * Validates that the author is not null.
+     * Validates the author.
      *
      * @param author the author to validate
      *
-     * @throws IllegalArgumentException if the author is null
+     * @throws IllegalArgumentException if the author is invalid
      */
     private static void validateAuthor(final Author author)
     {
         if (author == null)
         {
-            throw new IllegalArgumentException("Author cannot be null.");
+            throw new IllegalArgumentException("Invalid author: " + author);
         }
     }
 
     /**
      * Compares this book to another book based on the title, older books are larger.
      *
-     * @param other the other book to compare to
+     * @param that the other book to compare to
      * @return a negative integer, zero, or a positive integer based on result.
      */
     @Override
@@ -103,9 +100,16 @@ public class Book implements Comparable<Book>, Printable, Reversible
     @Override
     public void display()
     {
-        System.out.println("Title: " + title + "\n" +
-        "Year Published: " + yearPublished + "\n" +
-        "Author: " + author);
+        final StringBuilder builder;
+        builder = new StringBuilder();
+
+        builder.append("Title: ");
+        builder.append(title);
+        builder.append("\nYear Published: ");
+        builder.append(yearPublished);
+        builder.append("\nAuthor: ");
+        builder.append(author);
+        System.out.println(builder);
     }
 
     /**

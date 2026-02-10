@@ -1,16 +1,16 @@
 package ca.bcit.comp2522.bookstoresimulation;
 
 /**
- * E
+ * Models an Author, a type of Person.
  *
  * @author Mischa Potter
  * @author Kenny Fok
- *
  * @version 1.0
  */
 public class Author extends Person implements Printable
 {
     private static final int MAX_GENRE_LENGTH = 30;
+
     private final String genre;
 
     /**
@@ -21,7 +21,10 @@ public class Author extends Person implements Printable
      * @param name        the name of the author
      * @param genre       the genre of the author's work
      */
-    public Author(final Date dateOfBirth, final Date dateOfDeath, final Name name, final String genre)
+    public Author(final Date dateOfBirth,
+                  final Date dateOfDeath,
+                  final Name name,
+                  final String genre)
     {
         super(dateOfBirth, dateOfDeath, name);
 
@@ -31,21 +34,17 @@ public class Author extends Person implements Printable
     }
 
     /*
-     * Validates that the genre is not null or empty and less max genre length.
+     * Validates the genre.
      *
      * @param genre the genre to validate
      *
-     * @throws IllegalArgumentException if the genre is null or empty or exceeds max genre length.
+     * @throws IllegalArgumentException if the genre is invalid
      */
     private static void validateGenre(final String genre)
     {
-        if (genre == null || genre.isEmpty())
+        if (genre == null || genre.isEmpty() || genre.length() > MAX_GENRE_LENGTH)
         {
-            throw new IllegalArgumentException("Genre cannot be null or empty.");
-        }
-        if (genre.length() > MAX_GENRE_LENGTH)
-        {
-            throw new IllegalArgumentException("Genre cannot exceed " + MAX_GENRE_LENGTH + " characters.");
+            throw new IllegalArgumentException("Invalid genre: " + genre);
         }
     }
 
@@ -55,10 +54,20 @@ public class Author extends Person implements Printable
     @Override
     public void display()
     {
-        System.out.println("Author: " + getName().getFirstName() + " " + getName().getLastName() + "\n" +
-        "Genre: " + genre + "\n" +
-        "Date of Birth: " + getDateOfBirth() + "\n" +
-        "Date of Death: " + getDateOfDeath());
+        final StringBuilder builder;
+        builder = new StringBuilder();
+        builder.append("Author: ");
+        builder.append(getName().getFirstName());
+        builder.append(" ");
+        builder.append(getName().getLastName());
+        builder.append("\nGenre: ");
+        builder.append(genre);
+        builder.append("\nDate of Birth: ");
+        builder.append(getDateOfBirth());
+        builder.append("\nDate of Death: ");
+        builder.append(getDateOfDeath());
+
+        System.out.println(builder);
     }
 
 
