@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
  *
  * @author Mischa Potter
  * @author Kenny Fok
+ * 
  * @version 1.0
  */
 public class Person implements Comparable<Object>, Printable, Reversible
@@ -78,11 +79,7 @@ public class Person implements Comparable<Object>, Printable, Reversible
     private static void validateDateOfDeath(final Date dateOfDeath,
                                             final Date dateOfBirth)
     {
-        if (dateOfDeath == null)
-        {
-            //??
-        }
-        else if (dateOfDeath.isBefore(dateOfBirth))
+        if (dateOfDeath != null && dateOfDeath.isBefore(dateOfBirth))
         {
             throw new IllegalArgumentException("Invalid date of death: " + dateOfDeath);
         }

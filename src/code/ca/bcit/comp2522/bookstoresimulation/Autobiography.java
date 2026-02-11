@@ -5,6 +5,7 @@ package ca.bcit.comp2522.bookstoresimulation;
  *
  * @author Mischa Potter
  * @author Kenny Fok
+ * 
  * @version 1.0
  */
 public class Autobiography extends Biography implements Printable
