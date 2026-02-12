@@ -8,7 +8,8 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Date implements Printable
+public class Date
+        implements Printable
 {
     // date mins and max's
     private static final int MIN_YEAR            = 1800;

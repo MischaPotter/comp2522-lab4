@@ -8,7 +8,9 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Biography extends Book implements Printable
+public class Biography
+        extends Book
+            implements Printable
 {
     private final Person subject;
 
@@ -70,6 +72,7 @@ public class Biography extends Book implements Printable
         {
             return false;
         }
+
         final Biography b;
         b = (Biography) o;
 

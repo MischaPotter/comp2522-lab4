@@ -8,7 +8,8 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Name implements Printable
+public class Name
+        implements Printable
 {
     private final String firstName;
     private final String lastName;

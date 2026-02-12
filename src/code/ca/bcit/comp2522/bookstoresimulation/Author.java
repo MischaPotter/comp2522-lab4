@@ -8,10 +8,13 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Author extends Person implements Printable, Comparable<Object>
+public class Author
+        extends Person
+          implements Printable,
+                      Comparable<Object>
 {
     private static final int SAME_YEAR_COMPARETO_RESULT = 1;
-    private static final int MAX_GENRE_LENGTH           = 30;
+    private static final int MAX_GENRE_LENGTH           = 30000;
 
     private final String genre;
 

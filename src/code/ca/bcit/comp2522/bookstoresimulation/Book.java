@@ -8,11 +8,15 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Book implements Comparable<Book>, Printable, Reversible
+public class Book
+        implements Comparable<Book>,
+                    Printable,
+                    Reversible
 {
     private static final int MAX_TITLE_LENGTH   = 100;
     private static final int MIN_YEAR_PUBLISHED = 1;
     private static final int CURRENT_YEAR       = 2026;
+    private static  final int MAX_YEAR_PUBLISHED = CURRENT_YEAR;
 
     private final String title;
     private final int    yearPublished;
@@ -62,7 +66,7 @@ public class Book implements Comparable<Book>, Printable, Reversible
      */
     private static void validateYearPublished(final int yearPublished)
     {
-        if (yearPublished < MIN_YEAR_PUBLISHED || yearPublished > CURRENT_YEAR)
+        if (yearPublished < MIN_YEAR_PUBLISHED || yearPublished > MAX_YEAR_PUBLISHED)
         {
             throw new IllegalArgumentException("Invalid year: " + yearPublished);
         }
@@ -119,7 +123,7 @@ public class Book implements Comparable<Book>, Printable, Reversible
     @Override
     public void backwards()
     {
-        StringBuilder reversedTitle;
+        final StringBuilder reversedTitle;
         reversedTitle = new StringBuilder(title);
         reversedTitle.reverse();
         System.out.println("The title backwards is: " + reversedTitle.toString());

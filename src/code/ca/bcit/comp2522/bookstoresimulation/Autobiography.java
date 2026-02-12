@@ -8,7 +8,9 @@ package ca.bcit.comp2522.bookstoresimulation;
  * 
  * @version 1.0
  */
-public class Autobiography extends Biography implements Printable
+public class Autobiography
+        extends Biography
+            implements Printable
 {
     final Author author;
 

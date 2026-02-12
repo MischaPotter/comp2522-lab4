@@ -79,7 +79,11 @@ public class Person implements Comparable<Object>, Printable, Reversible
     private static void validateDateOfDeath(final Date dateOfDeath,
                                             final Date dateOfBirth)
     {
-        if (dateOfDeath != null && dateOfDeath.isBefore(dateOfBirth))
+        if (dateOfDeath == null)
+        {
+            return;
+        }
+        else if (dateOfDeath.isBefore(dateOfBirth))
         {
             throw new IllegalArgumentException("Invalid date of death: " + dateOfDeath);
         }
